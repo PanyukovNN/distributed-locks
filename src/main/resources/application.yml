@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /${spring.application.name}/api/v1/
+
+spring:
+  application:
+    name: distributed-locks
+
+hazelcast:
+  network:
+    join:
+      multicast:
+        enabled: true

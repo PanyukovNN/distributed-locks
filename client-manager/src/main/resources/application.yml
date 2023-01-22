@@ -1,0 +1,29 @@
+server:
+  port: ${PORT}
+  servlet:
+    context-path: /${spring.application.name}/api/v1/
+
+spring:
+  application:
+    name: client-manager
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST}/postgres
+    password: postgres
+    username: postgres
+    hikari:
+      schema: ${spring.application.name}
+      connection-init-sql: CREATE SCHEMA IF NOT EXISTS "${spring.application.name}"
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    open-in-view: false
+
+hazelcast:
+  network:
+    join:
+      multicast:
+        enabled: true

@@ -1,0 +1,46 @@
+version: '3.3'
+
+volumes:
+  postgres_distributed_lock_volume:
+
+services:
+  client-manager:
+    build:
+      context: ./
+      dockerfile: ./DockerfileClientManager
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: postgres:5432
+      PORT: 8088
+
+  client-manager-replica:
+    build:
+      context: ./
+      dockerfile: ./DockerfileClientManager
+    depends_on:
+      - postgres
+    environment:
+      POSTGRES_HOST: postgres:5432
+      PORT: 8089
+
+  postgres:
+    image: postgres:latest
+    container_name: distributed_locks_postgres
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_distributed_lock_volume:/var/lib/postgresql/data
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: ./DockerfileNginx
+    ports:
+      - "8088:80"
+    depends_on:
+      - client-manager
+      - client-manager-replica

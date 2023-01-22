@@ -1,0 +1,8 @@
+FROM openjdk:21-slim
+
+COPY /client-manager/build/libs/client-manager.jar /client-manager.jar
+
+EXPOSE 8088
+ENV TZ=Europe/Moscow
+
+ENTRYPOINT ["java", "-jar", "/client-manager.jar"]

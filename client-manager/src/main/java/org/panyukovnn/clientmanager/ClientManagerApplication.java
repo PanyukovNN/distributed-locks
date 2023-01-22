@@ -1,12 +1,12 @@
-package org.panyukovnn.distributedlocks;
+package org.panyukovnn.clientmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DistributedLocksApplication {
+public class ClientManagerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DistributedLocksApplication.class, args);
+        SpringApplication.run(ClientManagerApplication.class, args);
     }
 }

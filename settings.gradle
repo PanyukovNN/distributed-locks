@@ -1,1 +1,3 @@
 rootProject.name = 'distributed-locks'
+
+include 'client-manager'
